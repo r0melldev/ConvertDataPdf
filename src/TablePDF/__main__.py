@@ -1,4 +1,3 @@
-import random
 from .structurePdf import structurePdf
 from .detailsOrder import *
 from .styles import *
@@ -59,32 +58,23 @@ def createDocuments(tuplaArrayCases):
         ('TIRAS DE UNIÓN'           ,2,	870,	90,   	15,	'BB 22X1 /  BB 22X0.45'       	, 'CD BB',  'PVC BB',	'-',	    '-'),
     )
 
-    print(tuplaArrayCases)
-    
+    #Order List by description 
+    listOrderByDescription = sorted(tuplaArrayCases, key=lambda x: x[2])
+
+    #Create a structure Pdf 
     pdf = structurePdf(orientation = 'P', unit = 'mm', format='A4') 
     pdf.alias_nb_pages()
-
     pdf.add_page()
 
     # Information Order
-    bcol_set(pdf, 'green')
-    tfont_size(pdf,10)
+    bcol_set(pdf, 'white')
+    tfont_size(pdf,9)
     tfont(pdf,'B')
-    detailOrder(pdf)
+    detailOrder(pdf, tuplaArrayCases[0])
 
-    # tabla ----
-
-    # encabezado tabla
-    bcol_set(pdf, 'green')
-    tfont_size(pdf,15)
-    tfont(pdf,'B')
-    pdf.cell(w = 0, h = 15, txt = 'Orden de Producción', border = 0,ln = 2, align = 'C', fill = 1)
-    tfont(pdf,'')
-
-    # columna de infomacion 
+    # Table Products  
     tfont_size(pdf,6)
     bcol_set(pdf, 'blue')
-
 
     pdf.cell(w = 27, h = 10, txt = 'DESCRIPCION', border = 1, align = 'C', fill = 1)
     pdf.cell(w = 7, h = 10, txt = 'CANT', border = 1, align = 'C', fill = 1)
@@ -98,32 +88,30 @@ def createDocuments(tuplaArrayCases):
     pdf.multi_cell(w = 0, h = 10, txt = 'FILO IZQ MEDIDA 2', border = 1, align = 'C',  fill = 1)
 
     #estilos del color de borde y de letra 
-
     tfont_size(pdf,6)
     dcol_set(pdf, 'blue')
     tcol_set(pdf, 'gray')
-    pdf.rect(x= 10, y= 60, w= 190, h= 53)
-    c = 0
 
-    for datos in tuplaArrayCases:
+    c = 0
+    for datos in listOrderByDescription:
         c+=1
         if(c%2==0):bcol_set(pdf, 'gray2')
         else:bcol_set(pdf, 'white')
-        pdf.cell(w = 27, h = 7, txt = str(datos[1]), border = 'TBL', align = 'L', fill = 1)
-        pdf.cell(w = 7, h = 7, txt =  str(datos[11]), border = 'TB', align = 'C', fill = 1)
-        pdf.cell(w = 13, h = 7, txt =  str(datos[2]), border = 'TB', align = 'C', fill = 1)
+        pdf.cell(w = 27, h = 7, txt = str(datos[2]), border = 'TBL', align = 'L', fill = 1)
+        pdf.cell(w = 7, h = 7, txt =  str(datos[12]), border = 'TB', align = 'C', fill = 1)
         pdf.cell(w = 13, h = 7, txt =  str(datos[3]), border = 'TB', align = 'C', fill = 1)
-        pdf.cell(w = 15, h = 7, txt =  str(datos[4]), border = 'TB', align = 'C', fill = 1)
-        pdf.cell(w = 25, h = 7, txt = datos[5], border = 'TB', align = 'L', fill = 1)
-        pdf.cell(w = 22, h = 7, txt = datos[6], border = 'TB', align = 'C', fill = 1)
-        pdf.cell(w = 22, h = 7, txt = datos[7], border = 'TB', align = 'C', fill = 1)
-        pdf.cell(w = 22, h = 7, txt = datos[8], border = 'TB', align = 'C', fill = 1)
-        pdf.multi_cell(w = 0, h = 7, txt = datos[9], border = 'TBR', align = 'C', fill = 1)
+        pdf.cell(w = 13, h = 7, txt =  str(datos[4]), border = 'TB', align = 'C', fill = 1)
+        pdf.cell(w = 15, h = 7, txt =  str(datos[5]), border = 'TB', align = 'C', fill = 1)
+        pdf.cell(w = 25, h = 7, txt = str(datos[6]), border = 'TB', align = 'L', fill = 1)
+        pdf.cell(w = 22, h = 7, txt = str(datos[7]), border = 'TB', align = 'C', fill = 1)
+        pdf.cell(w = 22, h = 7, txt = str(datos[8]), border = 'TB', align = 'C', fill = 1)
+        pdf.cell(w = 22, h = 7, txt = str(datos[9]), border = 'TB', align = 'C', fill = 1)
+        pdf.multi_cell(w = 0, h = 7, txt = str(datos[10]), border = 'TBR', align = 'C', fill = 1)
 
-
-    numero_aleatorio = random.randint(0, 100)
-    nameDocument = tuplaArrayCases[0][0] + str(numero_aleatorio) 
-    print(tuplaArrayCases[0][0])
-
+    #Export Document PDF
+    nameDocument = structureNamePDF(tuplaArrayCases[0])
     pdf.output('documents/' + nameDocument + '.pdf')
 
+
+def structureNamePDF(informationFirstTupla):
+    return informationFirstTupla[11] + '-' + informationFirstTupla[1] 
