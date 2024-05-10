@@ -1,8 +1,9 @@
+import os
 from .structurePdf import structurePdf
 from .detailsOrder import *
 from .styles import *
 
-def createDocuments(tuplaArrayCases):
+def createDocuments(tuplaArrayCases, tuplaInformationHead):
 
     lista_datos = (
         ('BASES'                    ,1,	620,	500,   	15,	'BB 22X1	             '      , 'CD BB',  'XX',       '-',	    '-'),
@@ -62,7 +63,7 @@ def createDocuments(tuplaArrayCases):
     listOrderByDescription = sorted(tuplaArrayCases, key=lambda x: x[2])
 
     #Create a structure Pdf 
-    pdf = structurePdf(orientation = 'P', unit = 'mm', format='A4') 
+    pdf = structurePdf(orientation = 'L', unit = 'mm', format='A4') 
     pdf.alias_nb_pages()
     pdf.add_page()
 
@@ -70,18 +71,18 @@ def createDocuments(tuplaArrayCases):
     bcol_set(pdf, 'white')
     tfont_size(pdf,9)
     tfont(pdf,'B')
-    detailOrder(pdf, tuplaArrayCases[0])
+    detailOrder(pdf, tuplaArrayCases[0], tuplaInformationHead)
 
     # Table Products  
     tfont_size(pdf,6)
     bcol_set(pdf, 'blue')
 
-    pdf.cell(w = 27, h = 10, txt = 'DESCRIPCION', border = 1, align = 'C', fill = 1)
+    pdf.cell(w = 80, h = 10, txt = 'DESCRIPCIÓN', border = 1, align = 'C', fill = 1)
     pdf.cell(w = 7, h = 10, txt = 'CANT', border = 1, align = 'C', fill = 1)
     pdf.cell(w = 13, h = 10, txt = 'ANCHO M1', border = 1, align = 'C', fill = 1)
     pdf.cell(w = 13, h = 10, txt = 'ALTO M2', border = 1, align = 'C', fill = 1)
     pdf.cell(w = 15, h = 10, txt = 'ESPESOR', border = 1, align = 'C', fill = 1)
-    pdf.cell(w = 25, h = 10, txt = 'CÓDIGO FILO', border = 1, align = 'C', fill = 1)
+    pdf.cell(w = 50, h = 10, txt = 'CÓDIGO FILO', border = 1, align = 'C', fill = 1)
     pdf.cell(w = 22, h = 10, txt = 'FILO SUP MEDIDA 1', border = 1, align = 'C', fill = 1)
     pdf.cell(w = 22, h = 10, txt = 'FILO INF MEDIDA 1', border = 1, align = 'C', fill = 1)
     pdf.cell(w = 22, h = 10, txt = 'FILO DER MEDIDA 2', border = 1, align = 'C', fill = 1)
@@ -97,12 +98,12 @@ def createDocuments(tuplaArrayCases):
         c+=1
         if(c%2==0):bcol_set(pdf, 'gray2')
         else:bcol_set(pdf, 'white')
-        pdf.cell(w = 27, h = 7, txt = str(datos[2]), border = 'TBL', align = 'L', fill = 1)
+        pdf.cell(w = 80, h = 7, txt = str(datos[2]), border = 'TBL', align = 'L', fill = 1)
         pdf.cell(w = 7, h = 7, txt =  str(datos[12]), border = 'TB', align = 'C', fill = 1)
         pdf.cell(w = 13, h = 7, txt =  str(datos[3]), border = 'TB', align = 'C', fill = 1)
         pdf.cell(w = 13, h = 7, txt =  str(datos[4]), border = 'TB', align = 'C', fill = 1)
         pdf.cell(w = 15, h = 7, txt =  str(datos[5]), border = 'TB', align = 'C', fill = 1)
-        pdf.cell(w = 25, h = 7, txt = str(datos[6]), border = 'TB', align = 'L', fill = 1)
+        pdf.cell(w = 50, h = 7, txt = str(datos[6]), border = 'TB', align = 'L', fill = 1)
         pdf.cell(w = 22, h = 7, txt = str(datos[7]), border = 'TB', align = 'C', fill = 1)
         pdf.cell(w = 22, h = 7, txt = str(datos[8]), border = 'TB', align = 'C', fill = 1)
         pdf.cell(w = 22, h = 7, txt = str(datos[9]), border = 'TB', align = 'C', fill = 1)
@@ -110,7 +111,13 @@ def createDocuments(tuplaArrayCases):
 
     #Export Document PDF
     nameDocument = structureNamePDF(tuplaArrayCases[0])
-    pdf.output('documents/' + nameDocument + '.pdf')
+    
+    dinamicRoute = 'documents/NORDEN_' + str(tuplaInformationHead[3])
+
+    if not os.path.exists(dinamicRoute):
+        os.mkdir(dinamicRoute)
+    
+    pdf.output('documents/'+ 'NORDEN_' + str(tuplaInformationHead[3]) + '/' + nameDocument + '.pdf')
 
 
 def structureNamePDF(informationFirstTupla):

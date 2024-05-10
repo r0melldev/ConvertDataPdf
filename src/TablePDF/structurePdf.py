@@ -1,6 +1,7 @@
 from fpdf import FPDF
 
 from .styles import *
+from .detailsOrder import *
 
 class structurePdf(FPDF):
 
@@ -13,16 +14,24 @@ class structurePdf(FPDF):
         tcol_set(self, 'blue')
         tfont_size(self,45)
         tfont(self,'B')
-        self.cell(w = 0, h = 20, txt = 'NOVAPAN', border = 0, ln=1,
+        self.cell(w = 0, h = 20, txt = 'KLASS MUEBLES', border = 0, ln=1,
                 align = 'C', fill = 0)
 
         tfont_size(self,10)
         tcol_set(self, 'black')
         tfont(self,'I')
-        self.cell(w = 0, h = 10, txt = 'Generado el 2024/04/17', border = 0, ln=2,
+        self.cell(w = 0, h = 10, txt = 'ÁREA DE PLANIFICACIÓN Y OPERACIONES', border = 0, ln=2,
                 align = 'C', fill = 0)
 
         self.ln(5)
+
+          # Information Order
+        bcol_set(self, 'white')
+        tfont_size(self,9)
+        tfont(self,'B')
+        # detailOrder(self, tuplaArrayCases, tuplaInformationHead)
+
+
 
     # Page footer
     def footer(self):
