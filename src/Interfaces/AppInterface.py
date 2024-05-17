@@ -1,11 +1,14 @@
 
 from tkinter import *
+from tkinter import filedialog
+
+from src.TablePDF.__main__ import createDocuments
+from src.HandleData.importExelData import getDataClasificated
 
 class Aplicacion:
 
-    responseService = ''
-
-   
+    nameRouteFile = ''
+    statusApp = NO
 
 
     def __init__(self, screenMain):
@@ -19,79 +22,88 @@ class Aplicacion:
         # self.etiqueta = Label(ventana, textvariable=self.contador)
         # self.etiqueta.pack()
 
-
-    
-        screenMain.title('Principal interface')
-        screenMain.minsize(width=500, height=500)
+        screenMain.title('Generate Files')
+        screenMain.minsize(width=400, height=200)
         screenMain.config(padx=35, pady=35)
 
 
+        #Proyect
+        self.proyectLabelName = Label(screenMain, text="Ingrese el proyecto:", font=("Arial", 10)) 
+        self.proyectLabelName.grid(column=0, row=1, padx=6, pady=6, sticky='w')
 
-
-          #Proyect
-        self.proyectLabelName = Label(text="Ingrese el proyecto:", font=("Arial", 10)) 
-        self.proyectLabelName.grid(column=0, row=1)
-
-        self.proyectInput = Entry(width=20, font=("Arial", 10))
-        self.proyectInput.grid(column=1, row=1) 
-
-        self.spaceLabelName = Label( text="", font=("Arial", 10)) 
-        self.spaceLabelName.grid(column=0)
+        self.proyectInput = Entry(screenMain, width=20, font=("Arial", 10))
+        self.proyectInput.grid(column=1, row=1, padx=6, pady=6, sticky='w')
 
         # #Cliente
-        # clientLabelName = Label(text="Ingrese el cliente:", font=("Arial", 10) ) 
-        # clientLabelName.grid(column=0, row=3)
+        self.clientLabelName = Label(text="Ingrese el cliente:", font=("Arial", 10) ) 
+        self.clientLabelName.grid(column=0, row=3, padx=6, pady=6, sticky='w')
 
-        # clientInput = Entry(width=20, font=("Arial", 10))
-        # clientInput.grid(column=1, row=3) 
-
-        # spaceLabelName = Label( text="", font=("Arial", 10)) 
-        # spaceLabelName.grid(column=0)
+        self.clientInput = Entry(width=20, font=("Arial", 10))
+        self.clientInput.grid(column=1, row=3, padx=6, pady=6, sticky='w') 
 
         # #Dep
-        # depLabelName = Label(text="Ingrese el departamento:", font=("Arial", 10) ) 
-        # depLabelName.grid(column=0, row=5)
+        self.depLabelName = Label(text="Ingrese el departamento:", font=("Arial", 10) ) 
+        self.depLabelName.grid(column=0, row=5, padx=6, pady=6, sticky='w')
 
-        # depInput = Entry(width=20, font=("Arial", 10))
-        # depInput.grid(column=1, row=5)
+        self.depInput = Entry(width=20, font=("Arial", 10))
+        self.depInput.grid(column=1, row=5, padx=6, pady=6, sticky='w')
 
-        # spaceLabelName = Label( text="", font=("Arial", 10)) 
-        # spaceLabelName.grid(column=0)
-    
         # #orderProduction
-        # orderProductionLabelName = Label(text="Ingrese N° Order:", font=("Arial", 10) ) 
-        # orderProductionLabelName.grid(column=0, row=7)
+        self.orderProductionLabelName = Label(text="Ingrese N° Order:", font=("Arial", 10) ) 
+        self.orderProductionLabelName.grid(column=0, row=7, padx=6, pady=6, sticky='w')
 
-        # orderProductionInput = Entry(width=20, font=("Arial", 10))
-        # orderProductionInput.grid(column=1, row=7)
+        self.orderProductionInput = Entry(width=20, font=("Arial", 10))
+        self.orderProductionInput.grid(column=1, row=7, padx=6, pady=6, sticky='w')
 
-        # spaceLabelName = Label( text="", font=("Arial", 10)) 
-        # spaceLabelName.grid(column=0)
-    
         # #dateSave
-        # dateSaveLabelName = Label(text="Ingrese el departamento:", font=("Arial", 10) ) 
-        # dateSaveLabelName.grid(column=0, row=9)
+        self.dateSaveLabelName = Label(text="Ingrese el departamento:", font=("Arial", 10) ) 
+        self.dateSaveLabelName.grid(column=0, row=9, padx=6, pady=6, sticky='w')
 
-        # dateSaveInput = Entry(width=20, font=("Arial", 10))
-        # dateSaveInput.grid(column=1, row=9)
+        self.dateSaveInput = Entry(width=20, font=("Arial", 10))
+        self.dateSaveInput.grid(column=1, row=9, padx=6, pady=6, sticky='w')
 
-        # spaceLabelName = Label( text="", font=("Arial", 10)) 
-        # spaceLabelName.grid(column=0)
+        # #Select File
+        self.selectFileButton = Button(text="Select", font=("Arial", 10), command=self.chooseFile)
+        self.selectFileButton.grid(column=0, row=10, padx=6, pady=6, sticky='w')
 
-        self.getDataButton = Button(text="Enviar", font=("Arial", 10), command=self.incrementar_contador)
-        self.getDataButton.grid(column=0, row=11)
+        self.routeFile=Entry() 
+        self.routeFile.grid(column=1, row=10, padx=6, pady=6, sticky='w')
+
+        # #Generate Data
+        self.getDataButton = Button( state="normal",text="Enviar", font=("Arial", 10), command=self.generateFilesData)
+        self.getDataButton.grid(column=0, row=11, padx=6, pady=6, sticky='w')
 
 
-    def incrementar_contador(self):
-            #self.proyectInput.set(self.proyectInput.get() + 1)
+    def chooseFile(self):
+
+        # Abrir el explorador de archivos en la ruta especificada
+        self.statusApp = YES
+
+        ruta_archivo = filedialog.askopenfilename()
+        self.nameRouteFile = ruta_archivo
+
+        self.routeFile.insert(0, ruta_archivo) 
+
+
+    def generateFilesData(self):
+           
+        #self.proyectInput.set(self.proyectInput.get() + 1)
         
-        testEntre = self.proyectInput.get() 
-        # print(testEntre)
+        proyectValue = self.proyectInput.get().upper()
+        clientValue = self.clientInput.get().upper()
+        depValue = self.depInput.get().upper()
+        orderProductionValue = self.orderProductionInput.get().upper()
+        dateSaveValue = self.dateSaveInput.get().upper()
+        
+        tuplaInformationHead = [proyectValue, clientValue, depValue, orderProductionValue, dateSaveValue]
+        tuplaArrayCases = getDataClasificated(self.nameRouteFile)
 
-        self.responseService = testEntre
+        for segmentEnd in tuplaArrayCases:
+            createDocuments(segmentEnd, tuplaInformationHead )
+
+
+
+
     
-    def getDataResponse(self):
-        return self.responseService
-
 
   
