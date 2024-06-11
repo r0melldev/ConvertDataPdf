@@ -9,7 +9,7 @@ class structurePdf(FPDF):
         #self.image('logo.png',
          #       x = 10, y = 10, w = 30, h = 30)
 
-        self.set_font('Arial', '', 15)
+        self.set_font('Arial', '', 13)
 
         tcol_set(self, 'blue')
         tfont_size(self,45)

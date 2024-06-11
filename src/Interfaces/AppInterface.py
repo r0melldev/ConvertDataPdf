@@ -23,54 +23,54 @@ class Aplicacion:
         # self.etiqueta.pack()
 
         screenMain.title('Generate Files')
-        screenMain.minsize(width=400, height=200)
+        screenMain.minsize(width=600 , height=200)
         screenMain.config(padx=35, pady=35)
 
 
         #Proyect
-        self.proyectLabelName = Label(screenMain, text="Ingrese el proyecto:", font=("Arial", 10)) 
+        self.proyectLabelName = Label(screenMain, text="Ingrese el proyecto:", font=("Arial", 12))       
         self.proyectLabelName.grid(column=0, row=1, padx=6, pady=6, sticky='w')
 
-        self.proyectInput = Entry(screenMain, width=20, font=("Arial", 10))
+        self.proyectInput = Entry(screenMain, width=40, font=("Arial", 12))
         self.proyectInput.grid(column=1, row=1, padx=6, pady=6, sticky='w')
 
         # #Cliente
-        self.clientLabelName = Label(text="Ingrese el cliente:", font=("Arial", 10) ) 
+        self.clientLabelName = Label(text="Ingrese el cliente:", font=("Arial", 12) ) 
         self.clientLabelName.grid(column=0, row=3, padx=6, pady=6, sticky='w')
 
-        self.clientInput = Entry(width=20, font=("Arial", 10))
+        self.clientInput = Entry(width=40, font=("Arial", 12))
         self.clientInput.grid(column=1, row=3, padx=6, pady=6, sticky='w') 
 
         # #Dep
-        self.depLabelName = Label(text="Ingrese el departamento:", font=("Arial", 10) ) 
+        self.depLabelName = Label(text="Ingrese el departamento:", font=("Arial", 12) ) 
         self.depLabelName.grid(column=0, row=5, padx=6, pady=6, sticky='w')
 
-        self.depInput = Entry(width=20, font=("Arial", 10))
+        self.depInput = Entry(width=40, font=("Arial", 12))
         self.depInput.grid(column=1, row=5, padx=6, pady=6, sticky='w')
 
         # #orderProduction
-        self.orderProductionLabelName = Label(text="Ingrese N° Order:", font=("Arial", 10) ) 
+        self.orderProductionLabelName = Label(text="Ingrese N° Order:", font=("Arial", 12) ) 
         self.orderProductionLabelName.grid(column=0, row=7, padx=6, pady=6, sticky='w')
 
-        self.orderProductionInput = Entry(width=20, font=("Arial", 10))
+        self.orderProductionInput = Entry(width=40, font=("Arial", 12))
         self.orderProductionInput.grid(column=1, row=7, padx=6, pady=6, sticky='w')
 
         # #dateSave
-        self.dateSaveLabelName = Label(text="Ingrese el departamento:", font=("Arial", 10) ) 
+        self.dateSaveLabelName = Label(text="Ingrese fecha de ingreso:", font=("Arial", 12) ) 
         self.dateSaveLabelName.grid(column=0, row=9, padx=6, pady=6, sticky='w')
 
-        self.dateSaveInput = Entry(width=20, font=("Arial", 10))
+        self.dateSaveInput = Entry(width=40, font=("Arial", 12))
         self.dateSaveInput.grid(column=1, row=9, padx=6, pady=6, sticky='w')
 
         # #Select File
-        self.selectFileButton = Button(text="Select", font=("Arial", 10), command=self.chooseFile)
+        self.selectFileButton = Button(text="Select", font=("Arial", 12), command=self.chooseFile)
         self.selectFileButton.grid(column=0, row=10, padx=6, pady=6, sticky='w')
 
-        self.routeFile=Entry() 
+        self.routeFile=Entry(width=60, font=("Arial", 8)) 
         self.routeFile.grid(column=1, row=10, padx=6, pady=6, sticky='w')
 
         # #Generate Data
-        self.getDataButton = Button( state="normal",text="Enviar", font=("Arial", 10), command=self.generateFilesData)
+        self.getDataButton = Button( state="normal",text="Enviar", font=("Arial", 12), command=self.generateFilesData)
         self.getDataButton.grid(column=0, row=11, padx=6, pady=6, sticky='w')
 
 

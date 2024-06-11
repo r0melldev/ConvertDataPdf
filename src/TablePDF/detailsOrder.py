@@ -1,6 +1,9 @@
-def detailOrder(document, information, tuplaInformationHead):
+def detailOrder(document, information, tuplaInformationHead, optionType):
  
-     nameVestidor = information[11] + ' - ' + information[0] 
+     if optionType == 1:
+          nameVestidor = information[11] + ' - ' + information[0] 
+     else: 
+          nameVestidor = information[11] + ' - ' + information[13] + ' - ' + information[0] 
 
      proyectName = 'PROYECTO: ' + str(tuplaInformationHead[0]).upper()  
      clientName = 'CLIENTE: ' + str(tuplaInformationHead[1]).upper() 
@@ -20,13 +23,11 @@ def detailOrder(document, information, tuplaInformationHead):
      document.multi_cell(w = 0, h = 6, txt = depName, border = 0,
           align = 'L', fill = 6)  
      
-     
      document.cell(w = 100, h = 6, txt = oPName, border = 0,
           align = 'L', fill = 6)
 
      document.multi_cell(w = 0, h = 6, txt = dateSaveName, border = 0,
           align = 'L', fill = 6)
-
 
      document.multi_cell(w = 0, h = 6, txt = nameVestidor, border = 0,
           align = 'L', fill = 6)
