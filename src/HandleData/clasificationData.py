@@ -58,8 +58,7 @@ def groupByData2(dataGroup, category):
                 tuplasSegmentsResponse.append(lista_de_tuplas)
                 #print(grupo_df.describe())
 
-    print('--------')
-    print('entra en la segunda clasificacion')
+    print('--------')   
     #print(tuplasBySegments)
     return tuplasSegmentsResponse
 

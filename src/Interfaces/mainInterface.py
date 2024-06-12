@@ -147,7 +147,8 @@ class PageOne(tk.Frame):
         dataInformationReport = repotDataVerefication(tuplaArrayCases)
 
         # Create a report document 
-        createReportFile(dataInformationReport)
+        createReportFile(dataInformationReport, 1, orderProductionValue )
+
         
         for segmentEnd in tuplaArrayCases:
             createDocuments(segmentEnd, tuplaInformationHead, 1)
@@ -245,7 +246,7 @@ class PageTwo(tk.Frame):
         dataInformationReport = repotDataVerefication(tuplaArrayCases)
 
         # Create a report document 
-        createReportFile(dataInformationReport)
+        createReportFile(dataInformationReport, 2, orderProductionValue )
         
 
         for segmentEnd in tuplaArrayCases:

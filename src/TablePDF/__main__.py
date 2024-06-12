@@ -32,11 +32,9 @@ def createDocuments(tuplaArrayCases, tuplaInformationHead, optionType):
     pdf.cell(w = 22.5, h = 10, txt = 'FILO SUP MEDIDA 1', border = 1, align = 'C', fill = 1)
     pdf.cell(w = 22.5, h = 10, txt = 'FILO INF MEDIDA 1', border = 1, align = 'C', fill = 1)
     pdf.cell(w = 22.5, h = 10, txt = 'FILO DER MEDIDA 2', border = 1, align = 'C', fill = 1)
-    pdf.cell(w = 10, h = 10, txt = 'FILO IZQ MEDIDA 2', border = 1, align = 'C',  fill = 1)
-    pdf.multi_cell(w = 0, h = 10, txt = 'RESPONSABLE', border = 1, align = 'C',  fill = 1)
+    pdf.multi_cell(w = 0, h = 10, txt = 'FILO IZQ MEDIDA 2', border = 1, align = 'C',  fill = 1)
 
 
-    # pdf.multi_cell(w = 0, h = 10, txt = 'FILO IZQ MEDIDA 2', border = 1, align = 'C',  fill = 1)
 
 
     #estilos del color de borde y de letra 
@@ -59,11 +57,9 @@ def createDocuments(tuplaArrayCases, tuplaInformationHead, optionType):
         pdf.cell(w = 22.5, h = 7, txt = str(datos[7]), border = 'TB', align = 'C', fill = 1)
         pdf.cell(w = 22.5, h = 7, txt = str(datos[8]), border = 'TB', align = 'C', fill = 1)
         pdf.cell(w = 22.5, h = 7, txt = str(datos[9]), border = 'TB', align = 'C', fill = 1)
-        pdf.cell(w = 10, h = 7, txt = str(datos[10]), border = 'TBR', align = 'C', fill = 1)
-        pdf.multi_cell(w = 0, h = 7, txt = str(datos[13]), border = 'TBR', align = 'C', fill = 1)
+        pdf.multi_cell(w = 0, h = 7, txt = str(datos[10]), border = 'TBR', align = 'C', fill = 1)
 
 
-        # pdf.multi_cell(w = 0, h = 7, txt = str(datos[10]), border = 'TBR', align = 'C', fill = 1)
 
     #Export Document PDF
     currentRoute = os.getcwd()
@@ -83,13 +79,17 @@ def createDocuments(tuplaArrayCases, tuplaInformationHead, optionType):
         os.mkdir(dinamicRoute)
     
     
-    nameDocument = structureNamePDF(tuplaArrayCases[0])
+    nameDocument = structureNamePDF(tuplaArrayCases[0], optionType )
 
     pdf.output(dinamicRoute + '/' + nameDocument + '.pdf')
 
 
-def structureNamePDF(informationFirstTupla):
-    return informationFirstTupla[11] + '-' + informationFirstTupla[13] + '-' + informationFirstTupla[1] 
+def structureNamePDF(informationFirstTupla, optionType):
+
+    if optionType == 1: 
+        return informationFirstTupla[11] + '-' + informationFirstTupla[1] 
+    else:    
+        return informationFirstTupla[11] + '-' + informationFirstTupla[13] + '-' + informationFirstTupla[1] 
 
 def createFilesFistOption(tuplaInformationHead, numberOrder):
    nameDocument =  'documents/'+ 'NORDEN_' +     numberOrder + '/' + nameDocument + '.pdf'
