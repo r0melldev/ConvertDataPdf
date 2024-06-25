@@ -12,7 +12,7 @@ class MainApplication(tk.Tk):
 
         super().__init__(*args, **kwargs)
         
-        self.title("Aplicación con múltiples pantallas")
+        self.title("Klass App")
         self.geometry("600x400")
         
         # Container to hold all the frames
@@ -43,7 +43,7 @@ class StartPage(tk.Frame):
     def __init__(self, parent, controller):
         super().__init__(parent)
         self.controller = controller
-        label = tk.Label(self, text="Esta es la página de inicio")
+        label = tk.Label(self, text="Opciones de Clasificación")
         label.pack(pady=10, padx=10)
         
         button1 = tk.Button(self, text="MUEBLES",

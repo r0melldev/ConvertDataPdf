@@ -17,16 +17,16 @@ def detailOrder(document, information, tuplaInformationHead, optionType):
      document.cell(w = 130, h = 6, txt = clientName , border = 0,
           align = 'L', fill = 6)
 
-     document.cell(w = 100, h = 6, txt = proyectName, border = 0,
+     document.cell(w = 80, h = 6, txt = proyectName, border = 0,
           align = 'L', fill = 6)
      
-     document.multi_cell(w = 0, h = 6, txt = depName, border = 0,
+     document.multi_cell(w = 0, h = 6, txt = dateSaveName, border = 0,
           align = 'L', fill = 6)  
      
      document.cell(w = 130, h = 6, txt = oPName, border = 0,
           align = 'L', fill = 6)
 
-     document.multi_cell(w = 0, h = 6, txt = dateSaveName, border = 0,
+     document.multi_cell(w = 0, h = 6, txt = depName, border = 0,
           align = 'L', fill = 6)
 
      document.multi_cell(w = 0, h = 6, txt = nameVestidor, border = 0,

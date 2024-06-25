@@ -1,4 +1,6 @@
 import os
+import re
+
 from .structurePdf import structurePdf
 from .detailsOrder import *
 from .styles import *
@@ -86,10 +88,12 @@ def createDocuments(tuplaArrayCases, tuplaInformationHead, optionType):
 
 def structureNamePDF(informationFirstTupla, optionType):
 
+    codigoName = re.sub(r'/', '', informationFirstTupla[1])
+       
     if optionType == 1: 
-        return informationFirstTupla[11] + '-' + informationFirstTupla[1] 
+        return informationFirstTupla[11] + '-' + codigoName 
     else:    
-        return informationFirstTupla[11] + '-' + informationFirstTupla[13] + '-' + informationFirstTupla[1] 
+        return informationFirstTupla[11] + '-' + informationFirstTupla[13] + '-' + codigoName 
 
 def createFilesFistOption(tuplaInformationHead, numberOrder):
    nameDocument =  'documents/'+ 'NORDEN_' +     numberOrder + '/' + nameDocument + '.pdf'
