@@ -1,6 +1,6 @@
 import tkinter as tk
+import os
 from tkinter import filedialog
-
 
 from src.TablePDF.__main__ import createDocuments
 from src.HandleData.importExelData import getDataClasificated
@@ -14,6 +14,8 @@ class MainApplication(tk.Tk):
         
         self.title("Klass App")
         self.geometry("600x400")
+        icon_path = os.path.join(os.path.dirname(__file__), '..', 'assets', 'favicon.ico')
+        self.iconbitmap(icon_path)
         
         # Container to hold all the frames
         container = tk.Frame(self)

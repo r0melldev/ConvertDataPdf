@@ -7,10 +7,10 @@ from src.Interfaces.mainInterface import MainApplication
 
 
 # Definir la fecha límite
-fecha_limite = datetime.date(2024, 7, 25)  # Año, mes, día
+fecha_limite = datetime.date(2024, 12, 1)  # Año, mes, día
 
 
-# Obtener la fecha actual
+# Obtener la fecha actua8
 fecha_actual = datetime.date.today()
 
 # Verificar si la fecha actual es posterior a la fecha límite
