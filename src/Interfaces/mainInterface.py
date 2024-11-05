@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import ttk
 import os
 from tkinter import filedialog
 
@@ -40,21 +41,53 @@ class MainApplication(tk.Tk):
         frame = self.frames[page_name]
         frame.tkraise()
 
+# class StartPage(tk.Frame):
+
+#     def __init__(self, parent, controller):
+#         super().__init__(parent)
+#         self.controller = controller
+#         label = tk.Label(self, text="Opciones de Clasificación")
+#         label.pack(pady=10, padx=10)
+        
+#         button1 = tk.Button(self, text="MUEBLES",
+#                             command=lambda: controller.show_frame("PageOne"))
+#         button1.pack()
+        
+#         button2 = tk.Button(self, text="COMPLEMENTOS",
+#                             command=lambda: controller.show_frame("PageTwo"))
+#         button2.pack()
+
+
+
+
 class StartPage(tk.Frame):
 
     def __init__(self, parent, controller):
         super().__init__(parent)
         self.controller = controller
-        label = tk.Label(self, text="Opciones de Clasificación")
-        label.pack(pady=10, padx=10)
+
+        # Estilos
+        style = ttk.Style()
+        style.configure("TLabel", font=("Helvetica", 14, "bold"))
+        style.configure("TButton", font=("Helvetica", 12), padding=10)
         
-        button1 = tk.Button(self, text="MUEBLES",
-                            command=lambda: controller.show_frame("PageOne"))
-        button1.pack()
+        # Etiqueta con estilo
+        label = ttk.Label(self, text="Opciones de Clasificación", style="TLabel")
+        label.pack(pady=20, padx=20)
         
-        button2 = tk.Button(self, text="COMPLEMENTOS",
-                            command=lambda: controller.show_frame("PageTwo"))
-        button2.pack()
+        # Botones con estilo
+        button1 = ttk.Button(self, text="MUEBLES",
+                             command=lambda: controller.show_frame("PageOne"),
+                             style="TButton")
+        button1.pack(pady=10)
+        
+        button2 = ttk.Button(self, text="COMPLEMENTOS",
+                             command=lambda: controller.show_frame("PageTwo"),
+                             style="TButton")
+        button2.pack(pady=10)
+
+
+
 
         
 class PageOne(tk.Frame):
